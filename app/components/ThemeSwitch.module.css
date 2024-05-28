@@ -1,0 +1,18 @@
+.unmounted {
+    border-radius: 8px;
+    border-width: 0;
+    margin: 0;
+    font-size: 1.3rem;
+    transition: all 200ms;
+    width: 114px;
+    height: 40px;
+    opacity: 0;
+}
+.mounted {
+    composes: unmounted;
+    color: var(--foreground-opp);
+    background-color: var(--background-opp);
+    cursor: pointer;
+    text-align: center;
+    opacity: 100;
+}

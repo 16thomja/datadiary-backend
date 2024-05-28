@@ -1,0 +1,30 @@
+.navigation {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 10px 0px 10px;
+}
+.linksDiv {
+    display: flex;
+    white-space: nowrap; /* Prevent text wrapping */
+    overflow: hidden; /* Hide overflowing text */
+}
+.homeLink {
+    margin: auto 0px;
+}
+.links {
+    margin: auto 2px;
+    font-size: 1.3rem;
+}
+.currentLocation {
+    margin: auto 2px;
+    font-size: 1.3rem;
+    white-space: nowrap; /* Prevent text wrapping */
+    overflow: hidden; /* Hide overflowing text */
+    text-overflow: ellipsis; /* Show ellipsis for overflowed text */
+}
+.seps {
+    margin: auto 0px;
+    font-size: 1.3rem;
+}
