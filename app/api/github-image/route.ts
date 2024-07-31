@@ -11,6 +11,7 @@ export async function GET(request: Request) {
   const GITHUB_API_URL = `https://api.github.com/repos/16thomja/my-data-blog-posts/contents/${filePath}`
 
   try {
+    console.log('Fetching image from GitHub with download URL:', GITHUB_API_URL)
     const response = await fetch(GITHUB_API_URL, {
         headers: {
             Accept: 'application/vnd.github.v3.raw',
