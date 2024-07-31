@@ -1,28 +1,15 @@
 "use client"
 
-import React, { useRef, useEffect, useState, MutableRefObject } from "react"
+import React, { useRef, useEffect, useState } from "react"
 import Plot from 'react-plotly.js'
 import styles from './LazyPlot.module.css'
-
-// import Loadable from "react-loadable"
-
-// const Plotly = Loadable({
-//     loader: () => import(`react-plotly.js`),
-//     loading: ({ timedOut }) =>
-//       timedOut ? (
-//         <blockquote>Error: Loading Plotly timed out.</blockquote>
-//       ) : (
-//         <blockquote>Loading...</blockquote>
-//       ),
-//     timeout: 10000,
-// })
 
 interface LazyPlotProps {
     filePath: string
 }
 
 const fetchPlotlyFigure = async (filePath: string) => {
-    const response = await fetch(`/api/github-file?filePath=${encodeURIComponent(filePath)}`)
+    const response = await fetch(`/api/github-json?filePath=${encodeURIComponent(filePath)}`)
     if (!response.ok) {
         throw new Error('Failed to fetch file data')
     }
@@ -32,37 +19,33 @@ const fetchPlotlyFigure = async (filePath: string) => {
 
 export function LazyPlot(props: LazyPlotProps) {
     const [figure, setFigure] = useState<any>(null)
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
+    const [isFigureLoaded, setIsFigureLoaded] = useState(false)
 
     const plotContainerRef = useRef<any>()
     const [dimensions, setDimensions] = useState({ width: 0, height: 0})
 
     const aspectRatio = 4 / 3
 
-    // try to load figure json when filePath changes
-    useEffect(() => {
+    // fetch the figure data when the "Load figure" button is clicked
+    const loadFigure = async () => {
         if (!props.filePath) return
 
-        const getFileData = async () => {
-            try {
-                const data = await fetchPlotlyFigure(props.filePath)
-                // data.layout.margin = { t: 0, r: 0, b: 0, l: 0 }
-                // data.layout.paper_bgcolor = `rgba(0, 0, 0, 0)`
-                // data.layout.font = {color: `grey`, size: 12}
-                // data.layout.dragmode = true
-                // data.layout.autosize = true
-                setFigure(data)
-            } catch (err: any) {
-                setError(err.message)
-            } finally {
-                setLoading(false)
-            }
+        setLoading(true)
+        setError(null)
+        try {
+            const data = await fetchPlotlyFigure(props.filePath)
+            setFigure(data)
+            setIsFigureLoaded(true)
+        } catch (err: any) {
+            setError(err.message)
+        } finally {
+            setLoading(false)
         }
+    }
 
-        getFileData()
-    }, [props.filePath])
-
+    // add window resize listener for recalculating plot dimensions
     useEffect(() => {
         const updateDimensions = () => {
             const container = plotContainerRef.current
@@ -77,7 +60,16 @@ export function LazyPlot(props: LazyPlotProps) {
         window.addEventListener('resize', updateDimensions)
     }, [aspectRatio])
 
-    if (loading) return <div>Loading...</div>
+    if (!isFigureLoaded) {
+        return (
+            <div className={styles.loadButtonContainer} ref={plotContainerRef}>
+                <button className={styles.loadButton} onClick={loadFigure} disabled={loading}>
+                    {loading ? 'Loading...' : 'Load figure'}
+                </button>
+            </div>
+        )
+    }
+
     if (error) return <div>Error: {error}</div>
     if (!figure) return <div>Figure not found</div>
 
@@ -102,21 +94,17 @@ export function LazyPlot(props: LazyPlotProps) {
     return (
         <div className={styles.plotContainer} ref={plotContainerRef}>
             <div className={styles.plotContent}>
-                {figure ? (
-                    <Plot 
-                        data={figure.data}
-                        layout={layout}
-                        style={{ width: `100%`, height: `100%` }}
-                        useResizeHandler={true}
-                        config={{
-                            displayModeBar: false,
-                            showTips: false
-                        }}
-                        frames={figure.frames}
-                    />
-                ) : (
-                    <p>Loading...</p>
-                )}
+                <Plot 
+                    data={figure.data}
+                    layout={layout}
+                    style={{ width: `100%`, height: `100%` }}
+                    useResizeHandler={true}
+                    config={{
+                        displayModeBar: false,
+                        showTips: false
+                    }}
+                    frames={figure.frames}
+                />
             </div>
         </div>
     )

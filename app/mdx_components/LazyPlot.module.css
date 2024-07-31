@@ -1,3 +1,27 @@
+.loadButtonContainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: auto;
+    padding: 70px 0px;
+}
+
+.loadButton {
+    border-radius: 8px;
+    border-width: 0;
+    margin: 0;
+    font-size: 1.3rem;
+    transition: all 200ms;
+    width: 150px;
+    height: 60px;
+    opacity: 100;
+    cursor: pointer;
+    text-align: center;
+    background-color: var(--code-title-background);
+}
+
 .plotContainer {
     width: 100%;
     position: relative;
