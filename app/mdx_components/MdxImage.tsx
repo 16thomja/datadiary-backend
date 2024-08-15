@@ -14,7 +14,7 @@ const MdxImage: React.FC<MdxImageProps> = ({ filePath, alt, maxWidth, layout = '
         <div style={{ maxWidth, margin: '10px auto', width: '100%' }}>
             <div style={{ position: 'relative', width: '100%', height: 'auto' }}>
                 <Image
-                    src={`/api/github-image?filePath=${encodeURIComponent(filePath)}`}
+                    src={`/api/github-image?filePath=${filePath}`}
                     alt={alt}
                     layout={layout}
                     objectFit='contain'
