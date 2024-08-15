@@ -18,6 +18,7 @@ const MdxImage: React.FC<MdxImageProps> = ({ filePath, alt, maxWidth, layout = '
                     alt={alt}
                     layout={layout}
                     objectFit='contain'
+                    unoptimized={true}
                     sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                     width={0}
                     height={0}
