@@ -47,10 +47,14 @@ export default async function Post({ params: { postId }}: Props) {
             <article>
                 {content}
             </article>
+            {
+            /*
             <section>
                 <h3>related:</h3>
                 <div>{tags}</div>
             </section>
+            */
+            }
             <p>
                 <Link href="/">back to home</Link>
             </p>
