@@ -5,6 +5,7 @@ import { notFound } from "next/navigation"
 import styles from "./page.module.css"
 
 // automatic SSR due to no caching
+// page rendered on server at each request
 // export const revalidate = 0
 
 type Props = {

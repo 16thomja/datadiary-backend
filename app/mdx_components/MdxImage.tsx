@@ -5,16 +5,24 @@ interface MdxImageProps {
     filePath: string
     alt: string
     maxWidth: string
+    attribution?: string
     layout?: 'fixed' | 'intrinsic' | 'responsive' | 'fill' | undefined
     [key: string]: any
 }
 
-const MdxImage: React.FC<MdxImageProps> = ({ filePath, alt, maxWidth, layout = 'responsive', ...props }) => {
+const MdxImage: React.FC<MdxImageProps> = ({
+    filePath, 
+    alt, 
+    maxWidth, 
+    attribution,
+    layout = 'responsive', 
+    ...props 
+}) => {
     return (
         <div style={{ maxWidth, margin: '10px auto', width: '100%' }}>
             <div style={{ position: 'relative', width: '100%', height: 'auto' }}>
                 <Image
-                    src={`/api/github-image?filePath=${filePath}`}
+                    src={`https://assets.datadiary.dev/${filePath}`}
                     alt={alt}
                     layout={layout}
                     objectFit='contain'
@@ -25,6 +33,11 @@ const MdxImage: React.FC<MdxImageProps> = ({ filePath, alt, maxWidth, layout = '
                     {...props}
                 />
             </div>
+            {attribution && (
+                <p style={{ textAlign: 'center', fontSize: '12px', marginTop: '5px' }}>
+                    {attribution}
+                </p>
+            )}
         </div>
     )
 }
