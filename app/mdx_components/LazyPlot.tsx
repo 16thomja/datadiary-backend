@@ -10,8 +10,7 @@ interface LazyPlotProps {
 
 const fetchPlotlyFigure = async (filePath: string) => {
     const response = await fetch(`https://assets.datadiary.dev/${filePath}`, {
-        method: 'GET',
-        mode: 'cors'
+        method: 'GET'
     })
     if (!response.ok) {
         throw new Error('Failed to fetch file data')
