@@ -18,9 +18,11 @@ const mdxElements = {
     MdxImage
 }
 
+const branch = process.env.VERCEL_GIT_COMMIT_REF === 'main' ? 'main' : 'develop'
+
 // fetch BlogPost given directoryName
 export async function getPostByName(id: string): Promise<BlogPost | undefined> {
-    const res = await fetch(`https://raw.githubusercontent.com/16thomja/my-data-blog-posts/main/${id}/${id}.mdx`, {
+    const res = await fetch(`https://raw.githubusercontent.com/16thomja/my-data-blog-posts/${branch}/${id}/${id}.mdx`, {
         headers: {
             Accept: 'application/vnd.github+json',
             Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
@@ -63,7 +65,7 @@ export async function getPostByName(id: string): Promise<BlogPost | undefined> {
 
 // get data for all posts in order of recency
 export async function getPostsMeta(): Promise<Meta[] | undefined> {
-    const res = await fetch(`https://api.github.com/repos/16thomja/my-data-blog-posts/contents/`, {
+    const res = await fetch(`https://api.github.com/repos/16thomja/my-data-blog-posts/contents?ref=${branch}`, {
         headers: {
             Accept: 'application/vnd.github+json',
             Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
