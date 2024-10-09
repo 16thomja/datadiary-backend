@@ -5,22 +5,16 @@ import { notFound } from "next/navigation"
 import styles from "./page.module.css"
 
 // generate all dynamic post pages at build time by returning all slugs
-export async function getStaticPaths() {
+export async function generateStaticParams() {
     const posts = await getPostsMeta()
 
     if (!posts || posts.length === 0) {
-        return {
-            paths: [],
-            fallback: 'blocking'
-        }
+        return []
     }
 
-    return {
-        paths: posts.map((post: any) => ({
-            params: { postSlug: post.slug }
-        })),
-        fallback: 'blocking'
-    }
+    return posts.map((post: any) => ({
+            postSlug: post.slug
+        }))
 }
 
 export async function generateMetadata({ params }: { params: { postSlug: string } }) {
