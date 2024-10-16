@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react'
+import React, {useRef, useEffect, useState } from 'react'
 import styles from './MdxVideo.module.css'
 
 interface MdxVideoProps {
@@ -26,11 +26,19 @@ const MdxVideo: React.FC<MdxVideoProps> = ({
     loop = false,
     muted = false,
 }) => {
-    const aspectRatio = (originalHeight / originalWidth) * 100
+    const videoRef = useRef<HTMLDivElement>(null)
+    const [height, setHeight] = useState<number | null>(null)
+    
+    useEffect(() => {
+        if (videoRef.current) {
+            const calculatedHeight = (videoRef.current.offsetWidth * originalHeight) / originalWidth
+            setHeight(calculatedHeight)
+        }
+    }, [originalWidth, originalHeight])
 
     return (
         <div className={styles.videoWrapper} style={{ maxWidth: maxWidth || '100%' }}>
-            <div className={styles.videoContainer} style={{ paddingBottom: `${aspectRatio}` }}>
+            <div className={styles.videoContainer} style={{ height: height ? `${height}px` : 'auto' }}>
                 <video
                     src={`https://assets.datadiary.dev/${filePath}`}
                     controls={controls}

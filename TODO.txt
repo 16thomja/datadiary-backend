@@ -1,4 +1,3 @@
-- Prevent heavy components from being prefetched
 - Conduct lighthouse speed tests
 - Add code copy button
-- Add image attribution to MdxImage
+- Configure GitHub action for automatic ISR on post upload

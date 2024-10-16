@@ -84,7 +84,7 @@ export async function getPostsMeta(): Promise<Meta[] | undefined> {
             Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
             'Cache-Control': 'no-cache',
         },
-        next: { revalidate: 60 * 60 * 24 } // revalidate once per day
+        next: { revalidate: 0 } // revalidate once per day
     })
 
     if (!res.ok) return undefined
