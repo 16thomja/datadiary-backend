@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
 
 export async function POST(req: Request) {
     const secret = process.env.WEBHOOK_SECRET
@@ -13,16 +14,7 @@ export async function POST(req: Request) {
         const payload = await req.json()
         const remoteBranch = payload.ref // e.g. "refs/heads/main"
 
-        if (remoteBranch === 'refs/heads/main' || remoteBranch === 'refs/heads/develop') {
-            let subdomain = ''
-            if (remoteBranch === 'refs/heads/main' && branch === 'main') {
-                subdomain = 'www'
-            } else if (remoteBranch === 'refs/heads/develop' && branch === 'develop') {
-                subdomain = 'dev'
-            } else {
-                return NextResponse.json({ message: 'Webhook payload corresponds to different branch' })
-            }
-
+        if (remoteBranch === `refs/heads/${branch}`) {
             const commits = payload.commits
 
             const modifiedFiles = commits.flatMap((commit: any) => commit.modified)
@@ -40,14 +32,16 @@ export async function POST(req: Request) {
             }
 
             // revalidate post list
-            await fetch(`https://${subdomain}.datadiary.dev/blog`, { method: 'PURGE' })
+            console.log('[Next.js] Revalidating /blog')
+            revalidatePath(`/blog`)
 
             // revalidate each post page
             for (const slug of changedPostSlugs) {
-                await fetch(`https://${subdomain}.datadiary.dev/blog/${slug}`, { method: 'PURGE' })
+                console.log(`[Next.js] Revalidating /blog/${slug}`)
+                revalidatePath(`/blog/${slug}`)
             }
         } else {
-            return NextResponse.json({ message: `Unknown branch in payload: ${remoteBranch}`})
+            return NextResponse.json({ message: `Different branch in payload: ${remoteBranch}` })
         }
 
         return NextResponse.json({ revalidated: true })
