@@ -13,6 +13,7 @@ interface MdxVideoProps {
     autoPlay?: boolean
     loop?: boolean
     muted?: boolean
+    hideVolumeControl?: boolean
 }
 
 const MdxVideo: React.FC<MdxVideoProps> = ({
