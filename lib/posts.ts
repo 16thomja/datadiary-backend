@@ -21,7 +21,6 @@ const mdxElements = {
     ImageAttributionList
 }
 
-// fetch BlogPost given slug
 export async function getPostBySlug(slug: string): Promise<BlogPost | undefined> {
     const branch = process.env.VERCEL_GIT_COMMIT_REF === 'main' ? 'main' : 'develop'
     
@@ -30,8 +29,7 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | undefined>
             Accept: 'application/vnd.github+json',
             Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
             'Cache-Control': 'no-cache',
-        },
-        next: { revalidate: 0 },
+        }
     })
 
     if (!res.ok) return undefined
@@ -83,8 +81,7 @@ export async function getPostsMeta(): Promise<Meta[] | undefined> {
             Accept: 'application/vnd.github+json',
             Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
             'Cache-Control': 'no-cache',
-        },
-        next: { revalidate: 0 } // revalidate once per day
+        }
     })
 
     if (!res.ok) return undefined
