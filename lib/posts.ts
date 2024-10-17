@@ -25,7 +25,7 @@ const mdxElements = {
 export async function getPostBySlug(slug: string): Promise<BlogPost | undefined> {
     const branch = process.env.VERCEL_GIT_COMMIT_REF === 'main' ? 'main' : 'develop'
     
-    const res = await fetch(`https://raw.githubusercontent.com/16thomja/my-data-blog-posts/${branch}/${slug}/${slug}.mdx`, {
+    const res = await fetch(`https://raw.githubusercontent.com/16thomja/datadiary-posts/${branch}/${slug}/${slug}.mdx`, {
         headers: {
             Accept: 'application/vnd.github+json',
             Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
@@ -78,7 +78,7 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | undefined>
 export async function getPostsMeta(): Promise<Meta[] | undefined> {
     const branch = process.env.VERCEL_GIT_COMMIT_REF === 'main' ? 'main' : 'develop'
 
-    const res = await fetch(`https://api.github.com/repos/16thomja/my-data-blog-posts/contents?ref=${branch}`, {
+    const res = await fetch(`https://api.github.com/repos/16thomja/datadiary-posts/contents?ref=${branch}`, {
         headers: {
             Accept: 'application/vnd.github+json',
             Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
