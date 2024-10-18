@@ -2,13 +2,12 @@ import { NextResponse } from 'next/server'
 import { revalidatePath } from 'next/cache'
 
 export async function POST(req: Request) {
-    const secret = process.env.WEBHOOK_SECRET
-    const branch = process.env.VERCEL_GIT_COMMIT_REF === 'main' ? 'main' : 'develop'
-
-    const headers = req.headers.get('x-hub-signature')
-    if (headers !== secret) {
+    const webhookSecret = req.headers.get('x-hub-signature')
+    if (webhookSecret !== process.env.WEBHOOK_SECRET) {
         return NextResponse.json({ message: 'Invalid secret' }, { status: 401 })
     }
+
+    const branch = process.env.VERCEL_GIT_COMMIT_REF === 'main' ? 'main' : 'develop'
 
     try {
         const payload = await req.json()
