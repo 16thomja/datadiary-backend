@@ -41,15 +41,15 @@ export async function POST(req: Request) {
             const allChangedFiles = [...modifiedFiles, ...addedFiles]
 
             const changedPostSlugs = allChangedFiles
-                .filter((file: string) => file.startsWith('datadiary-posts/') && file.endsWith('.mdx'))
+                .filter((file: string) => file.endsWith('.mdx'))
                 .map((file: string) => {
-                    const match = file.match(/^datadiary-posts\/([^/]+)\/\1\.mdx$/)
+                    const match = file.match(/([^/]+)\/\1\.mdx$/)
                     return match ? match[1] : null
                 })
                 .filter(Boolean) // remove null values
 
             if (changedPostSlugs.length === 0) {
-                return NextResponse.json({ message: 'No blog posts changed' })
+                return NextResponse.json({ message: 'No blog posts changed' }, { status: 204 })
             }
 
             const subdomain = branch === 'main' ? 'www' : 'dev'
@@ -66,10 +66,10 @@ export async function POST(req: Request) {
             revalidatePath(`/blog`)
             await fetch(`https://${subdomain}.datadiary.dev/blog`, { method: 'GET' })
         } else {
-            return NextResponse.json({ message: `Different branch in payload: ${remoteBranch}` })
+            return NextResponse.json({ message: `Different branch in payload: ${remoteBranch}` }, { status: 400 })
         }
 
-        return NextResponse.json({ revalidated: true })
+        return NextResponse.json({ revalidated: true }, { status: 200 })
     } catch (err) {
         return NextResponse.json({ message: 'Error revalidating' }, { status: 500 })
     }
