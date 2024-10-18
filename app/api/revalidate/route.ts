@@ -1,20 +1,39 @@
 import { NextResponse } from 'next/server'
 import { revalidatePath } from 'next/cache'
+import { createHmac } from 'crypto'
+
+function verifySignature(payload: string, signature: string, secret: string): boolean {
+    const hmac = createHmac('sha256', secret)
+    hmac.update(payload, 'utf8')
+    const digest = `sha256=${hmac.digest('hex')}`
+    return digest === signature
+}
 
 export async function POST(req: Request) {
-    const webhookSecret = req.headers.get('x-hub-signature')
-    if (webhookSecret !== process.env.WEBHOOK_SECRET) {
-        return NextResponse.json({ message: 'Invalid secret' }, { status: 401 })
+    const secret = process.env.WEBHOOK_SECRET
+    if (!secret) {
+        return NextResponse.json({ message: 'Webhook secret is not defined' }, { status: 500 })
+    }
+
+    const signature = req.headers.get('X-Hub-Signature-256')
+    if (!signature) {
+        return NextResponse.json({ message: 'No signature found in headers' }, { status: 401 })
+    }
+
+    const payload = await req.text()
+
+    if (!verifySignature(payload, signature, secret)) {
+        return NextResponse.json({ message: 'Invalid signature' }, { status: 401 })
     }
 
     const branch = process.env.VERCEL_GIT_COMMIT_REF === 'main' ? 'main' : 'develop'
 
     try {
-        const payload = await req.json()
-        const remoteBranch = payload.ref // e.g. "refs/heads/main"
+        const jsonPayload = JSON.parse(payload)
+        const remoteBranch = jsonPayload.ref // e.g. "refs/heads/main"
 
         if (remoteBranch === `refs/heads/${branch}`) {
-            const commits = payload.commits
+            const commits = jsonPayload.commits
 
             const modifiedFiles = commits.flatMap((commit: any) => commit.modified).filter(Boolean)
             const addedFiles = commits.flatMap((commit: any) => commit.added).filter(Boolean)
