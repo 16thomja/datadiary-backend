@@ -33,17 +33,19 @@ export async function POST(req: Request) {
                 return NextResponse.json({ message: 'No blog posts changed' })
             }
 
+            const subdomain = branch === 'main' ? 'www' : 'dev'
+
             // revalidate each post page
             for (const slug of changedPostSlugs) {
                 console.log(`[Next.js] Revalidating /blog/${slug}`)
                 revalidatePath(`/blog/${slug}`)
-                await fetch(`/blog/${slug}`, { method: 'GET' })
+                await fetch(`https://${subdomain}.datadiary.dev/blog/${slug}`, { method: 'GET' })
             }
 
             // revalidate post list
             console.log('[Next.js] Revalidating /blog')
             revalidatePath(`/blog`)
-            await fetch(`/blog`, { method: 'GET' })
+            await fetch(`https://${subdomain}.datadiary.dev/blog`, { method: 'GET' })
         } else {
             return NextResponse.json({ message: `Different branch in payload: ${remoteBranch}` })
         }
