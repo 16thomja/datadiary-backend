@@ -5,10 +5,9 @@
     height: 500px;
 }
 
-.articleTitle {
-    padding: 20px 0px 0px;
+.postLink {
+    font-size: 1.5rem;
 }
-
-.articleDate {
-    padding: 0px 0px 20px;
+.postDate {
+    margin-left: 25px;
 }
