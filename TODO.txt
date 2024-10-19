@@ -1,3 +1,0 @@
-- Conduct lighthouse speed tests
-- Add code copy button
-- Configure GitHub action for automatic ISR on post upload
