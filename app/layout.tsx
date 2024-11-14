@@ -1,7 +1,8 @@
 import type { Metadata } from "next"
 import { Lora } from "next/font/google"
-import "./globals.css"
+import "@/styles/globals.css"
 import "katex/dist/katex.min.css"
+import "@/styles/katex-custom.css"
 import { Providers } from "./providers"
 import Navbar from "./app_components/Navbar"
 

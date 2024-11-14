@@ -4,11 +4,23 @@
     padding: 20px 10px;
     height: 500px;
 }
-
 .articleTitle {
     padding: 20px 0px 0px;
 }
-
 .articleDate {
     padding: 0px 0px 20px;
+}
+.blogReturnLinkContainer {
+    padding-top: 10px;
+    padding-bottom: 30px;
+}
+.blogReturnLink {
+    font-size: 1.4rem;
+}
+.blogReturnLink::before {
+    content: "\2190"; /* unicode character for left arrow */
+    margin-right: 0.5em; /* space between arrow and text */
+    position: relative;
+    transform: translateY(-2px); /* vertically align with text */
+    text-decoration: none;
 }

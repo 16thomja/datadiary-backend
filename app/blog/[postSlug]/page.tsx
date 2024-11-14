@@ -65,9 +65,9 @@ export default async function Post({ params }: { params: { postSlug: string } })
             </section>
             */
             }
-            <p>
-                <Link href="/blog">back to blog</Link>
-            </p>
+            <div className={styles.blogReturnLinkContainer}>
+                <Link className={styles.blogReturnLink} href="/blog">back to blog</Link>
+            </div>
         </main>
     )
 }

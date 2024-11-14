@@ -7,7 +7,6 @@
     height: auto;
     padding: 70px 0px;
 }
-
 .loadButton {
     border-radius: 8px;
     border-width: 0;
@@ -21,13 +20,11 @@
     text-align: center;
     background-color: var(--code-title-background);
 }
-
 .plotContainer {
     width: 100%;
     position: relative;
     padding-top: 75%; /* 4:3 */
 }
-
 .plotContent {
     position: absolute;
     top: 0;
