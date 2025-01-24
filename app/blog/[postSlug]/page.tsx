@@ -4,6 +4,12 @@ import { getPostBySlug, getPostsMeta } from '@/lib/posts';
 import { notFound } from 'next/navigation';
 import styles from './page.module.css';
 
+type PageProps = {
+  params: {
+    postSlug: string;
+  };
+};
+
 // Generate all dynamic post pages at build time by returning all slugs
 export async function generateStaticParams() {
   const posts = await getPostsMeta();
@@ -21,7 +27,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params
 }: {
-  params: { postSlug: string };
+  params: Promise<{ postSlug: string }>;
 }) {
   // Await params to ensure resolution
   const { postSlug } = await params;
@@ -43,7 +49,7 @@ export async function generateMetadata({
 export default async function Post({
   params
 }: {
-  params: { postSlug: string };
+  params: Promise<{ postSlug: string }>;
 }) {
   // Await params to ensure they are resolved before accessing `postSlug`
   const { postSlug } = await params;
