@@ -1,12 +1,12 @@
 .main {
-    display: flex;
-    flex-direction: column;
-    padding: 20px 10px;
-    height: 500px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 10px;
+  height: 500px;
 }
 .postLink {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
 }
 .postDate {
-    margin-left: 25px;
+  margin-left: 25px;
 }

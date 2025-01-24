@@ -1,73 +1,77 @@
-import Link from "next/link"
-import getFormattedDate from "@/lib/getFormattedDate"
-import { getPostBySlug, getPostsMeta } from "@/lib/posts"
-import { notFound } from "next/navigation"
-import styles from "./page.module.css"
+import Link from 'next/link';
+import getFormattedDate from '@/lib/getFormattedDate';
+import { getPostBySlug, getPostsMeta } from '@/lib/posts';
+import { notFound } from 'next/navigation';
+import styles from './page.module.css';
 
-// generate all dynamic post pages at build time by returning all slugs
+// Generate all dynamic post pages at build time by returning all slugs
 export async function generateStaticParams() {
-    const posts = await getPostsMeta()
+  const posts = await getPostsMeta();
 
-    if (!posts || posts.length === 0) {
-        return []
-    }
+  if (!posts || posts.length === 0) {
+    return [];
+  }
 
-    return posts.map((post: any) => ({
-            postSlug: post.slug
-        }))
+  return posts.map((post: any) => ({
+    postSlug: post.slug
+  }));
 }
 
-export async function generateMetadata({ params }: { params: { postSlug: string } }) {
-    const post = await getPostBySlug(params.postSlug)
+// Generate metadata dynamically for each page
+export async function generateMetadata({
+  params
+}: {
+  params: { postSlug: string };
+}) {
+  // Await params to ensure resolution
+  const { postSlug } = await params;
 
-    if (!post) {
-        return {
-            title: 'Post Not Found'
-        }
-    }
+  const post = await getPostBySlug(postSlug);
 
+  if (!post) {
     return {
-        title: post.meta.title,
-    }
+      title: 'Post Not Found'
+    };
+  }
+
+  return {
+    title: post.meta.title
+  };
 }
 
-export default async function Post({ params }: { params: { postSlug: string } }) {
-    const post = await getPostBySlug(params.postSlug)
+// Main component for rendering the post
+export default async function Post({
+  params
+}: {
+  params: { postSlug: string };
+}) {
+  // Await params to ensure they are resolved before accessing `postSlug`
+  const { postSlug } = await params;
 
-    if (!post) notFound()
+  // Fetch the post content
+  const post = await getPostBySlug(postSlug);
 
-    const { meta, content } = post
+  // If the post is not found, render the notFound page
+  if (!post) notFound();
 
-    const pubDate = getFormattedDate(meta.date)
+  const { meta, content } = post;
 
-    /*
-    const tags = meta.tags.map((tag, i) => (
-        <Link key={i} href={`/tags/${tag}`}>{tag}</Link>
-    ))
-        */
+  const pubDate = getFormattedDate(meta.date);
 
-    return (
-        <main className={styles.main} role="main">
-            <article>
-                <header>
-                    <h1 className={styles.articleTitle}>{meta.title}</h1>
-                    <p className={styles.articleDate}>{pubDate}</p>
-                </header>
-                <section>
-                    {content}
-                </section>
-            </article>
-            {
-            /*
-            <section>
-                <h3>related:</h3>
-                <div>{tags}</div>
-            </section>
-            */
-            }
-            <div className={styles.blogReturnLinkContainer}>
-                <Link className={styles.blogReturnLink} href="/blog">back to blog</Link>
-            </div>
-        </main>
-    )
+  return (
+    <main className={styles.main} role="main">
+      <article>
+        <header>
+          <h1 className={styles.articleTitle}>{meta.title}</h1>
+          <p className={styles.articleDate}>{pubDate}</p>
+        </header>
+        <section>{content}</section>
+      </article>
+      <div className={styles.blogReturnLinkContainer}>
+        <Link className={styles.blogReturnLink} href="/blog">
+          back to blog
+        </Link>
+      </div>
+    </main>
+  );
 }

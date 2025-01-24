@@ -10,7 +10,7 @@
   margin: 20px auto 20px 0px;
 }
 .viewAllLink::after {
-  content: " \2192"; /* Unicode character for right arrow */
+  content: ' \2192'; /* Unicode character for right arrow */
   position: relative;
   /*top: 50%;*/
   right: 0em;

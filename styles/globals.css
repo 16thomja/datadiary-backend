@@ -1,9 +1,9 @@
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
-  --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
-    "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
-    "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
+  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
+    'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
+    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
 
   --light-mode-background: rgb(243, 243, 243);
   --light-mode-foreground: black;
@@ -66,14 +66,16 @@ h1 {
 }
 
 h2 {
-  font-size: 2.0rem;
+  font-size: 2rem;
 }
 
 h3 {
   font-size: 1.6rem;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   padding: 20px 0px 20px;
 }
 
@@ -99,7 +101,8 @@ button {
   color: inherit;
 }
 
-ul, ol {
+ul,
+ol {
   list-style-position: inside;
   font-size: 1.11rem;
   padding: 10px 0px 10px;
@@ -143,11 +146,11 @@ pre > code > [data-line]::before {
   color: gray;
 }
 
-pre > code[data-line-numbers-max-digits="2"] > [data-line]::before {
+pre > code[data-line-numbers-max-digits='2'] > [data-line]::before {
   width: 2rem;
 }
 
-pre > code[data-line-numbers-max-digits="3"] > [data-line]::before {
+pre > code[data-line-numbers-max-digits='3'] > [data-line]::before {
   width: 3rem;
 }
 
@@ -159,24 +162,24 @@ pre > code[data-line-numbers-max-digits="3"] > [data-line]::before {
   position: relative;
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
-  height: 2.0rem;
+  height: 2rem;
   background-color: var(--code-title-background);
   font-family: var(--font-mono);
   font-size: 0.9rem;
   padding: 0.5rem 1rem;
 }
 
-pre[data-theme*=" "],
-code[data-theme*=" "],
-code[data-theme*=" "] span {
+pre[data-theme*=' '],
+code[data-theme*=' '],
+code[data-theme*=' '] span {
   color: var(--shiki-light);
   background-color: var(--shiki-light-bg);
 }
 
 [data-theme='dark'] {
-  pre[data-theme*=" "],
-  code[data-theme*=" "],
-  code[data-theme*=" "] span {
+  pre[data-theme*=' '],
+  code[data-theme*=' '],
+  code[data-theme*=' '] span {
     color: var(--shiki-dark);
     background-color: var(--shiki-dark-bg);
   }
