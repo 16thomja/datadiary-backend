@@ -4,12 +4,6 @@ import { getPostBySlug, getPostsMeta } from '@/lib/posts';
 import { notFound } from 'next/navigation';
 import styles from './page.module.css';
 
-type PageProps = {
-  params: {
-    postSlug: string;
-  };
-};
-
 // Generate all dynamic post pages at build time by returning all slugs
 export async function generateStaticParams() {
   const posts = await getPostsMeta();
