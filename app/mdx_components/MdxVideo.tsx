@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useRef, useEffect, useState } from 'react';
-import dynamic from 'next/dynamic';
 import styles from './MdxVideo.module.css';
 
 interface MdxVideoProps {
@@ -17,7 +16,7 @@ interface MdxVideoProps {
   hideVolumeControl?: boolean;
 }
 
-const MdxVideoComponent: React.FC<MdxVideoProps> = ({
+const MdxVideo: React.FC<MdxVideoProps> = ({
   filePath,
   alt,
   maxWidth,
@@ -62,10 +61,5 @@ const MdxVideoComponent: React.FC<MdxVideoProps> = ({
     </div>
   );
 };
-
-// Dynamically export the entire component
-const MdxVideo = dynamic(() => Promise.resolve(MdxVideoComponent), {
-  ssr: false // Disable server-side rendering
-});
 
 export default MdxVideo;

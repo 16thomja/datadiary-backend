@@ -2,7 +2,6 @@
 
 import React, { useRef, useEffect, useState, useMemo } from 'react';
 import Plot from 'react-plotly.js';
-import dynamic from 'next/dynamic';
 import styles from './LazyPlot.module.css';
 
 interface LazyPlotProps {
@@ -20,7 +19,7 @@ const fetchPlotlyFigure = async (filePath: string) => {
   return JSON.parse(text);
 };
 
-export function LazyPlotComponent({ filePath }: LazyPlotProps) {
+export function LazyPlot({ filePath }: LazyPlotProps) {
   const [figure, setFigure] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -110,10 +109,5 @@ export function LazyPlotComponent({ filePath }: LazyPlotProps) {
     </div>
   );
 }
-
-// Dynamically export the entire component
-const LazyPlot = dynamic(() => Promise.resolve(LazyPlotComponent), {
-  ssr: false // Disable server-side rendering
-});
 
 export default LazyPlot;
