@@ -1,19 +1,20 @@
-"use client";
+"use client"
 
-import React, { useRef, useEffect, useState } from "react";
-import styles from "./MdxVideo.module.css";
+import React, { useEffect, useRef, useState } from "react"
+
+import styles from "./MdxVideo.module.css"
 
 interface MdxVideoProps {
-  filePath: string;
-  alt: string;
-  maxWidth: string;
-  originalWidth: number;
-  originalHeight: number;
-  controls?: boolean;
-  autoPlay?: boolean;
-  loop?: boolean;
-  muted?: boolean;
-  hideVolumeControl?: boolean;
+  filePath: string
+  alt: string
+  maxWidth: string
+  originalWidth: number
+  originalHeight: number
+  controls?: boolean
+  autoPlay?: boolean
+  loop?: boolean
+  muted?: boolean
+  hideVolumeControl?: boolean
 }
 
 const MdxVideo: React.FC<MdxVideoProps> = ({
@@ -27,16 +28,16 @@ const MdxVideo: React.FC<MdxVideoProps> = ({
   loop = false,
   muted = false,
 }) => {
-  const videoRef = useRef<HTMLDivElement>(null);
-  const [height, setHeight] = useState<number | null>(null);
+  const videoRef = useRef<HTMLDivElement>(null)
+  const [height, setHeight] = useState<number | null>(null)
 
   useEffect(() => {
     if (videoRef.current) {
       const calculatedHeight =
-        (videoRef.current.offsetWidth * originalHeight) / originalWidth;
-      setHeight(calculatedHeight);
+        (videoRef.current.offsetWidth * originalHeight) / originalWidth
+      setHeight(calculatedHeight)
     }
-  }, [originalWidth, originalHeight]);
+  }, [originalWidth, originalHeight])
 
   return (
     <div
@@ -59,7 +60,7 @@ const MdxVideo: React.FC<MdxVideoProps> = ({
         </video>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default MdxVideo;
+export default MdxVideo
