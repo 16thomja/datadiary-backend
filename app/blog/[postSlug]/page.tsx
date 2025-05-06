@@ -17,7 +17,8 @@ export async function generateStaticParams() {
         }))
 }
 
-export async function generateMetadata({ params }: { params: { postSlug: string } }) {
+export async function generateMetadata(props: { params: Promise<{ postSlug: string }> }) {
+    const params = await props.params;
     const post = await getPostBySlug(params.postSlug)
 
     if (!post) {
@@ -31,7 +32,8 @@ export async function generateMetadata({ params }: { params: { postSlug: string 
     }
 }
 
-export default async function Post({ params }: { params: { postSlug: string } }) {
+export default async function Post(props: { params: Promise<{ postSlug: string }> }) {
+    const params = await props.params;
     const post = await getPostBySlug(params.postSlug)
 
     if (!post) notFound()
