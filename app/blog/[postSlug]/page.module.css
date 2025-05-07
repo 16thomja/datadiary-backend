@@ -1,18 +1,16 @@
 .main {
   display: flex;
   flex-direction: column;
-  padding: 20px 10px;
-  height: 500px;
+  margin: 10px 0px;
 }
 .articleTitle {
-  padding: 20px 0px 0px;
+  margin: 20px 0px 5px;
 }
 .articleDate {
-  padding: 0px 0px 20px;
+  margin: 0px 0px 20px;
 }
 .blogReturnLinkContainer {
-  padding-top: 10px;
-  padding-bottom: 30px;
+  margin: 20px 0px;
 }
 .blogReturnLink {
   font-size: 1.4rem;

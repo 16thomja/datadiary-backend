@@ -1,8 +1,7 @@
 .main {
   display: flex;
   flex-direction: column;
-  padding: 20px 10px;
-  height: 500px;
+  margin: 10px 0px;
 }
 .viewAllLink {
   font-size: 1.6rem;

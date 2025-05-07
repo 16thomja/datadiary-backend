@@ -4,8 +4,10 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+  font-size: 1.3rem;
   height: auto;
-  padding: 70px 0px;
+  margin: 70px 0px;
+  padding: 0px;
 }
 .loadButton {
   border-radius: 8px;

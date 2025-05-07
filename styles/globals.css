@@ -50,7 +50,7 @@ body {
 
 body {
   max-width: 800px;
-  padding: 0 10px;
+  padding: 0 20px;
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -77,12 +77,12 @@ h3 {
 h1,
 h2,
 h3 {
-  padding: 20px 0px 20px;
+  margin: 20px 0px;
 }
 
 p {
   font-size: 1.11rem;
-  padding: 10px 0px 10px;
+  margin: 10px 0px;
   line-height: 1.5;
 }
 
@@ -106,7 +106,7 @@ ul,
 ol {
   list-style-position: inside;
   font-size: 1.11rem;
-  padding: 10px 0px 10px;
+  margin: 10px 0px 10px 10px;
   line-height: 1.5;
 }
 

@@ -88,7 +88,8 @@ export function LazyPlot({ filePath }: LazyPlotProps) {
     }
   }, [figure, dimensions])
 
-  if (error) return <div>Error: {error}</div>
+  if (error)
+    return <div className={styles.loadButtonContainer}>Error: {error}</div>
 
   if (!figure) {
     return (
