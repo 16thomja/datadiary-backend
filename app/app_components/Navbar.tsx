@@ -11,7 +11,6 @@ import ThemeSwitch from "./ThemeSwitch"
 function PathElements({ path }: { path: string }) {
   // split the path into components
   const pathComponents = path.split("/").filter((component) => component !== "")
-  // array to store links
   const elements = []
 
   // add home link first
@@ -23,8 +22,8 @@ function PathElements({ path }: { path: string }) {
 
   // iterate over path components
   for (let i = 0; i < pathComponents.length; i++) {
+    elements.push(<span className={styles.fSlash}>/</span>)
     // if it's the last component, create a non-link span
-    elements.push(<span className={styles.seps}>/</span>)
     if (i == pathComponents.length - 1) {
       elements.push(
         <span className={styles.currentLocation}>{pathComponents[i]}</span>
@@ -33,7 +32,7 @@ function PathElements({ path }: { path: string }) {
       // otherwise, create a link
       const href = "/" + pathComponents.slice(0, i + 1).join("/")
       elements.push(
-        <Link className={styles.links} href={href}>
+        <Link className={styles.pathLink} href={href}>
           {pathComponents[i]}
         </Link>
       )

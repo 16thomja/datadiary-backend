@@ -1,11 +1,19 @@
-.main {
+.pageContainer {
+  margin: 0 auto;
+  padding: var(--space-4) 0;
   display: flex;
   flex-direction: column;
-  margin: 10px 0px;
+  gap: 0;
+}
+.pageHeader {
+  margin: var(--space-4) 0;
+}
+.postsList {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
 }
 .postLink {
-  font-size: 1.5rem;
-}
-.postDate {
-  margin-left: 25px;
+  font-size: var(--fs-xl);
 }

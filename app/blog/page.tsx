@@ -15,16 +15,16 @@ export default async function Blog() {
   const postLimit = undefined
 
   return (
-    <main className={styles.main}>
-      <h1>Posts</h1>
-      <ul>
+    <main className={styles.pageContainer}>
+      <h1 className={styles.pageHeader}>Posts</h1>
+      <ul className={styles.postsList}>
         {posts.slice(0, postLimit).map((post) => (
           <li key={post.slug}>
             <Link className={styles.postLink} href={`/blog/${post.slug}`}>
               {post.title}
             </Link>
             <br />
-            <p className={styles.postDate}>{getFormattedDate(post.date)}</p>
+            <time dateTime={post.date}>{getFormattedDate(post.date)}</time>
           </li>
         ))}
       </ul>

@@ -4,7 +4,7 @@ import rehypePrettyCode from "rehype-pretty-code"
 import remarkGfm from "remark-gfm"
 import remarkMath from "remark-math"
 
-import ImageAttributionList from "@/app/mdx_components/ImageAttributionList"
+import AttributionList from "@/app/mdx_components/AttributionList"
 import LazyPlot from "@/app/mdx_components/LazyPlot"
 import MdxImage from "@/app/mdx_components/MdxImage"
 import MdxVideo from "@/app/mdx_components/MdxVideo"
@@ -16,9 +16,9 @@ const rehypePrettyCodeOptions = {
   },
 }
 
-const mdxElements = {
+const mdxComponents = {
   MdxImage,
-  ImageAttributionList,
+  AttributionList,
   MdxVideo,
   LazyPlot,
 }
@@ -35,7 +35,7 @@ export async function getPostBySlug(
       headers: {
         Accept: "application/vnd.github+json",
         Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
-        "Cache-Control": "no-cache",
+        "Cache-Control": "no-store",
       },
     }
   )
@@ -53,7 +53,7 @@ export async function getPostBySlug(
     tags: string[]
   }>({
     source: rawMDX,
-    components: mdxElements,
+    components: mdxComponents,
     options: {
       parseFrontmatter: true,
       mdxOptions: {

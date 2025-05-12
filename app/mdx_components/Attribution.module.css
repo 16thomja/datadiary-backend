@@ -1,5 +1,5 @@
 .attribution {
-  font-size: 0.9rem;
+  font-size: var(--fs-base);
 }
 .attributionLink {
   font-size: inherit;

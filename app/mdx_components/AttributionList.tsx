@@ -1,10 +1,10 @@
 import React from "react"
 
-import ImageAttribution from "./ImageAttribution"
-import styles from "./ImageAttributionList.module.css"
+import Attribution from "./Attribution"
+import styles from "./AttributionList.module.css"
 
-interface ImageAttributionProps {
-  attributionId: number // unique identifier to match image in post
+interface AttributionProps {
+  attributionId: number // unique identifier to match item in post
   title: string
   author: string
   authorUrl?: string
@@ -15,13 +15,11 @@ interface ImageAttributionProps {
   modifications?: string
 }
 
-interface ImageAttributionListProps {
-  attributions: ImageAttributionProps[]
+interface AttributionListProps {
+  attributions: AttributionProps[]
 }
 
-const ImageAttributionList: React.FC<ImageAttributionListProps> = ({
-  attributions,
-}) => {
+const AttributionList: React.FC<AttributionListProps> = ({ attributions }) => {
   if (!attributions || attributions.length === 0) {
     return null
   }
@@ -32,7 +30,7 @@ const ImageAttributionList: React.FC<ImageAttributionListProps> = ({
       <ol>
         {attributions.map((attr) => (
           <li key={attr.attributionId}>
-            <ImageAttribution
+            <Attribution
               attributionId={attr.attributionId}
               title={attr.title}
               author={attr.author}
@@ -50,4 +48,4 @@ const ImageAttributionList: React.FC<ImageAttributionListProps> = ({
   )
 }
 
-export default ImageAttributionList
+export default AttributionList

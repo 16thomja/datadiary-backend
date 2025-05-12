@@ -43,7 +43,7 @@ const MdxImage: React.FC<MdxImageProps> = ({
         />
       </div>
       {attributionId && title && (
-        <figcaption className={styles.figcaption}>
+        <figcaption>
           {title}{" "}
           <a
             href={`#attribution-${attributionId}`}

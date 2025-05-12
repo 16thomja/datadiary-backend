@@ -1,9 +1,9 @@
 import React from "react"
 
-import styles from "./ImageAttribution.module.css"
+import styles from "./Attribution.module.css"
 
-interface ImageAttributionProps {
-  attributionId: number // unique identifier to match image in post
+interface AttributionProps {
+  attributionId: number // unique id for linking from item to attribution
   title: string
   author: string
   authorUrl?: string
@@ -14,7 +14,7 @@ interface ImageAttributionProps {
   modifications?: string
 }
 
-const ImageAttribution: React.FC<ImageAttributionProps> = ({
+const Attribution: React.FC<AttributionProps> = ({
   attributionId,
   title,
   author,
@@ -26,7 +26,7 @@ const ImageAttribution: React.FC<ImageAttributionProps> = ({
   modifications,
 }) => {
   return (
-    <div id={`attribution-${attributionId}`} style={{ fontSize: "0.85em" }}>
+    <div id={`attribution-${attributionId}`}>
       <p className={styles.attribution}>
         <strong>{title}</strong> by{" "}
         {authorUrl ? ( // make author name link if applicable
@@ -67,4 +67,4 @@ const ImageAttribution: React.FC<ImageAttributionProps> = ({
   )
 }
 
-export default ImageAttribution
+export default Attribution

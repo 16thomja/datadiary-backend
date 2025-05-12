@@ -41,7 +41,6 @@ export function LazyPlot({ filePath }: LazyPlotProps) {
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
   const aspectRatio = 4 / 3
 
-  // fetch the figure data when the "Load figure" button is clicked
   const loadFigure = async () => {
     if (!filePath) return
 
@@ -56,7 +55,7 @@ export function LazyPlot({ filePath }: LazyPlotProps) {
     }
   }
 
-  // add window resize listener for recalculating plot dimensions
+  // window resize listener for recalculating plot dimensions
   useEffect(() => {
     const updateDimensions = () => {
       if (plotContainerRef.current) {

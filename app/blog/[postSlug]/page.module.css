@@ -1,24 +1,27 @@
-.main {
+.pageContainer {
+  margin: 0 auto;
+  padding: var(--space-4) 0;
   display: flex;
   flex-direction: column;
-  margin: 10px 0px;
+  gap: var(--space-5); /* space between <article> and other page blocks */
 }
-.articleTitle {
-  margin: 20px 0px 5px;
+.articleHeader {
+  margin: var(--space-4) 0;
 }
-.articleDate {
-  margin: 0px 0px 20px;
+.articleContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4); /* spacing between children */
+  padding-block: var(--space-1); /* spacing above first and below last */
 }
-.blogReturnLinkContainer {
-  margin: 20px 0px;
+.articleContent h3 {
+  /* add extra space before and after each section title */
+  margin-block-start: var(--space-2);
+  margin-block-end: var(--space-2);
+}
+.articleFooter {
+  margin: var(--space-5) 0;
 }
 .blogReturnLink {
-  font-size: 1.4rem;
-}
-.blogReturnLink::before {
-  content: "\2190"; /* unicode character for left arrow */
-  margin-right: 0.5em; /* space between arrow and text */
-  position: relative;
-  transform: translateY(-2px); /* vertically align with text */
-  text-decoration: none;
+  font-size: 1.3rem;
 }

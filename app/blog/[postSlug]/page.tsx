@@ -55,25 +55,27 @@ export default async function Post(props: {
         */
 
   return (
-    <main className={styles.main} role="main">
+    <main className={styles.pageContainer}>
       <article>
-        <header>
+        <header className={styles.articleHeader}>
           <h1 className={styles.articleTitle}>{meta.title}</h1>
-          <p className={styles.articleDate}>{pubDate}</p>
+          <time className={styles.articleDate} dateTime={meta.date}>
+            {pubDate}
+          </time>
         </header>
-        <section>{content}</section>
+        <section className={styles.articleContent}>{content}</section>
+        <footer className={styles.articleFooter}>
+          <Link href="/blog" className={styles.blogReturnLink}>
+            ← Back to posts
+          </Link>
+        </footer>
       </article>
       {/*
             <section>
                 <h3>related:</h3>
                 <div>{tags}</div>
             </section>
-            */}
-      <div className={styles.blogReturnLinkContainer}>
-        <Link className={styles.blogReturnLink} href="/blog">
-          back to blog
-        </Link>
-      </div>
+      */}
     </main>
   )
 }

@@ -1,7 +1,8 @@
 .imageWrapper {
-  margin: 20px auto;
-  width: 100%;
+  display: inline-block;
+  margin-inline: auto;
   position: relative;
+  width: 100%;
 }
 .imageContainer {
   position: relative;
@@ -16,11 +17,6 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-}
-.figcaption {
-  text-align: center;
-  font-size: 0.9rem;
-  margin-top: 3px;
 }
 .attributionLink {
   text-decoration: none;

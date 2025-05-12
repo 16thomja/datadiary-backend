@@ -4,21 +4,14 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-size: 1.3rem;
-  height: auto;
-  margin: 70px 0px;
-  padding: 0px;
+  font-size: var(--fs-lg);
+  height: 130px;
 }
 .loadButton {
-  border-radius: 8px;
-  border-width: 0;
-  margin: 0;
-  font-size: 1.3rem;
-  transition: all 200ms;
-  width: 150px;
+  font-size: inherit;
+  width: 140px;
   height: 60px;
   opacity: 100;
-  cursor: pointer;
   text-align: center;
   background-color: var(--code-title-background);
 }

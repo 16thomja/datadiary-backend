@@ -1,12 +1,12 @@
 .unmounted {
-  border-radius: 8px;
-  border-width: 0;
-  margin: 0;
-  font-size: 1.3rem;
-  transition: all 200ms;
+  font-size: inherit;
   width: 114px;
   height: 40px;
   opacity: 0;
+
+  transition-property: color, background-color;
+  transition-duration: 200ms;
+  transition-timing-function: ease-in-out;
 }
 .mounted {
   composes: unmounted;
