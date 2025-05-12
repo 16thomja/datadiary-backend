@@ -67,15 +67,15 @@ html {
 body {
   color: var(--foreground);
   background: var(--background);
-  max-width: 800px;
+  max-width: 100ch;
   margin: 0 auto;
-  padding: 0 20px;
+  padding-inline: 1rem;
   overflow-x: hidden;
   line-height: var(--lh-base);
 }
 @media (min-width: 1200px) {
   body {
-    max-width: 1000px;
+    padding-inline: 2rem;
   }
 }
 

@@ -10,6 +10,8 @@ interface MdxVideoProps {
   maxWidth: string
   originalWidth: number
   originalHeight: number
+  attributionId?: number // unique identifier to match attribution at end of post
+  title?: string
   controls?: boolean
   autoPlay?: boolean
   loop?: boolean
@@ -23,6 +25,8 @@ const MdxVideo: React.FC<MdxVideoProps> = ({
   maxWidth,
   originalWidth,
   originalHeight,
+  attributionId,
+  title,
   controls = true,
   autoPlay = false,
   loop = false,
@@ -59,6 +63,17 @@ const MdxVideo: React.FC<MdxVideoProps> = ({
           {alt}
         </video>
       </div>
+      {attributionId && title && (
+        <figcaption>
+          {title}{" "}
+          <a
+            href={`#attribution-${attributionId}`}
+            className={styles.attributionLink}
+          >
+            [ {attributionId} ]
+          </a>
+        </figcaption>
+      )}
     </div>
   )
 }
