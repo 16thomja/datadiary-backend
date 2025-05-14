@@ -61,6 +61,7 @@
 
 html {
   font-size: 11pt;
+  -webkit-text-size-adjust: 100%; /* prevent font scaling in landscape while allowing user zoom */
   line-height: var(--lh-base);
 }
 
@@ -73,9 +74,9 @@ body {
   overflow-x: hidden;
   line-height: var(--lh-base);
 }
-@media (min-width: 1200px) {
+@media (max-height: 600px) and (orientation: landscape) {
   body {
-    padding-inline: 2rem;
+    padding-inline: 3rem;
   }
 }
 
