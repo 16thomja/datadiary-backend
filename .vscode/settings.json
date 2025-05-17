@@ -1,0 +1,23 @@
+{
+  // disable built-in TS/JS formatter
+  "javascript.format.enable": false,
+  "typescript.format.enable": false,
+
+  // use prettier as default formatter for code files
+  "[javascript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[javascriptreact]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[typescript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[typescriptreact]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[json]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[mdx]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+
+  // run both prettier and ESLint fixes on save
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.fixAll.eslint": "explicit"
+  },
+
+  // require prettier config in the workspace
+  "prettier.requireConfig": true
+}

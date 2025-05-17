@@ -1,0 +1,6 @@
+.attribution {
+  font-size: var(--fs-base);
+}
+.attributionLink {
+  font-size: inherit;
+}

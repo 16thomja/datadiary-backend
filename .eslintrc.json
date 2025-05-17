@@ -1,3 +1,52 @@
 {
-  "extends": "next/core-web-vitals"
+  "root": true,
+  "extends": [
+    "next/core-web-vitals", // Next.js built-in rules
+    "plugin:prettier/recommended" // run prettier as ESLint rule
+  ],
+  "plugins": ["unused-imports", "simple-import-sort"],
+  "rules": {
+    // enforce .prettierrc formatting
+    "prettier/prettier": ["error", {}, { "usePrettierrc": true }],
+
+    // automatically remove unused imports
+    "unused-imports/no-unused-imports": "error",
+    "unused-imports/no-unused-vars": [
+      "warn",
+      {
+        "vars": "all",
+        "varsIgnorePattern": "^_",
+        "args": "after-used",
+        "argsIgnorePattern": "^_"
+      }
+    ],
+
+    // keep imports/exports sorted
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error"
+  },
+  "overrides": [
+    {
+      // TypeScript files
+      "files": ["**/*.ts", "**/*.tsx"],
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": { "project": "./tsconfig.json" },
+      "extends": [
+        "plugin:@typescript-eslint/recommended",
+        "plugin:prettier/recommended"
+      ],
+      "rules": {
+        "@typescript-eslint/consistent-type-imports": "error",
+        "@typescript-eslint/no-explicit-any": "off"
+      }
+    },
+    {
+      // API routes
+      "files": ["app/api/**/*.ts", "app/api/**/*.tsx"],
+      "rules": {
+        "unused-imports/no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": "off"
+      }
+    }
+  ]
 }

@@ -1,11 +1,31 @@
-
-
 :root {
-  --max-width: 1100px;
-  --border-radius: 12px;
-  --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
+  --font-mono:
+    ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
     "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
     "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
+
+  /* stacked child spacing */
+  --space-0: 0px;
+  --space-1: 5px;
+  --space-2: 10px;
+  --space-3: 15px;
+  --space-4: 20px;
+  --space-5: 25px;
+  --space-6: 30px;
+
+  /* font size */
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.9rem;
+  --fs-base: 1.11rem;
+  --fs-lg: 1.2rem;
+  --fs-xl: 1.6rem;
+  --fs-2xl: 2rem;
+  --fs-3xl: 2.4rem;
+
+  /* line height */
+  --lh-tight: 1.2;
+  --lh-base: 1.5;
+  --lh-loose: 1.75;
 
   --light-mode-background: rgb(243, 243, 243);
   --light-mode-foreground: black;
@@ -22,8 +42,8 @@
   --code-title-background: var(--light-mode-code-title-background);
 }
 
-[data-theme='dark'],
-[data-theme='dark'] body {
+[data-theme="dark"],
+[data-theme="dark"] body {
   --background: var(--dark-mode-background);
   --foreground: var(--dark-mode-foreground);
   --background-opp: var(--light-mode-background);
@@ -31,7 +51,9 @@
   --code-title-background: var(--dark-mode-code-title-background);
 }
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
@@ -39,78 +61,76 @@
 
 html {
   font-size: 11pt;
+  -webkit-text-size-adjust: 100%; /* prevent font scaling in landscape while allowing user zoom */
+  line-height: var(--lh-base);
 }
 
-html,
 body {
-  height: 100%;
   color: var(--foreground);
-  background-color: var(--background);
+  background: var(--background);
+  max-width: 100ch;
   margin: 0 auto;
-}
-
-body {
-  max-width: 800px;
-  padding: 0 10px;
+  padding-inline: 1rem;
   overflow-x: hidden;
-  overflow-y: auto;
+  line-height: var(--lh-base);
 }
-
-@media only screen and (min-width: 1200px) {
-  html,
+@media (max-height: 600px) and (orientation: landscape) {
   body {
-    max-width: 1000px;
+    padding-inline: 3rem;
   }
 }
 
 h1 {
-  font-size: 2.4rem;
+  font-size: var(--fs-3xl);
+  line-height: var(--lh-tight);
 }
 
 h2 {
-  font-size: 2.0rem;
+  font-size: var(--fs-2xl);
+  line-height: var(--lh-tight);
 }
 
 h3 {
-  font-size: 1.6rem;
-}
-
-h1, h2, h3 {
-  padding: 20px 0px 20px;
-}
-
-p {
-  font-size: 1.11rem;
-  padding: 10px 0px 10px;
-  line-height: 1.5;
+  font-size: var(--fs-xl);
+  line-height: var(--lh-tight);
 }
 
 a {
-  font-size: 1.11rem;
   color: var(--foreground);
   text-underline-offset: 0.1em;
 }
-
 a:hover {
   text-decoration: none;
 }
 
 button {
-  font-size: 1.2rem;
   font-family: inherit;
-  color: inherit;
+  border-radius: 8px;
+  border-width: 0;
+  cursor: pointer;
 }
 
-ul, ol {
-  list-style-position: inside;
-  font-size: 1.11rem;
-  padding: 10px 0px 10px;
-  line-height: 1.5;
+p,
+ul,
+ol,
+time {
+  font-size: var(--fs-base);
+  line-height: var(--lh-base);
 }
 
-li {
-  padding-left: 1.5rem;
-  text-indent: -1.5rem;
+ul,
+ol {
+  /* put the bullet/number in the margin area */
+  list-style-position: outside;
+  /* indent the whole list block by 1.5rem */
+  padding-inline-start: 1.5rem;
+}
+
+figcaption {
+  text-align: center;
+  font-size: var(--fs-sm);
+  line-height: var(--lh-base);
+  margin-top: var(--space-1);
 }
 
 /* rehype-pretty-code styling */
@@ -125,7 +145,8 @@ pre > code {
   display: grid;
   padding: 1.5rem 0;
   counter-reset: line;
-  font-size: 0.9rem;
+  font-size: var(--fs-sm);
+  line-height: var(--lh-tight);
   /* Fixes iOS code font sizing anomaly */
   text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
@@ -159,9 +180,10 @@ pre > code[data-line-numbers-max-digits="3"] > [data-line]::before {
 
 [data-rehype-pretty-code-title] {
   position: relative;
+  text-align: left;
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
-  height: 2.0rem;
+  height: 2rem;
   background-color: var(--code-title-background);
   font-family: var(--font-mono);
   font-size: 0.9rem;
@@ -175,7 +197,7 @@ code[data-theme*=" "] span {
   background-color: var(--shiki-light-bg);
 }
 
-[data-theme='dark'] {
+[data-theme="dark"] {
   pre[data-theme*=" "],
   code[data-theme*=" "],
   code[data-theme*=" "] span {
