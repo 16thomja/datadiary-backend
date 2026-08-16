@@ -56,6 +56,7 @@ export async function getPostBySlug(
     components: mdxComponents,
     options: {
       parseFrontmatter: true,
+      blockJS: false,
       mdxOptions: {
         remarkPlugins: [remarkGfm, remarkMath],
         rehypePlugins: [
